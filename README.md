@@ -1,16 +1,24 @@
 # MiniChat
 
-Simple chat app
+Simple chat app using Flutter and Firebase.
+
+> Originally created to fulfill the assessment of the Multimedia Mobile Programming course.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Clone this repository
+```
+git clone https://github.com/Muzakki839/flutter-minichat.git
+```
 
-A few resources to get you started if this is your first Flutter project:
+2. Install dependencies
+```
+ flutter pub get
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. Add Firebase to the project [follow here](https://firebase.google.com/docs/flutter/setup?hl=en&authuser=0&platform=android)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+4. Run app
+```
+flutter run
+```
