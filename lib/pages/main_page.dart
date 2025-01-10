@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:minichat/auth/auth_service.dart';
 import 'package:minichat/pages/contents/chats_page.dart';
 import 'package:minichat/pages/contents/contacts_page.dart';
-import 'package:minichat/pages/auth/login_page.dart';
 import 'package:minichat/pages/contents/tools_page.dart';
 import 'package:minichat/widgets/app_title.dart';
 import 'package:minichat/widgets/bottom_tab_bar.dart';
@@ -46,6 +46,15 @@ class _MainPageState extends State<MainPage>
       ToolsPage(),
     ];
 
+    // logout method
+    void logout(context) {
+      // get auth service
+      final authService = AuthService();
+
+      // sign out
+      authService.signOut();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Padding(
@@ -57,11 +66,7 @@ class _MainPageState extends State<MainPage>
             onSelected: (value) {
               switch (value) {
                 case "logout":
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => LoginPage(),
-                    ),
-                  );
+                  logout(context);
                   break;
                 default:
               }
