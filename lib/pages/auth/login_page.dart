@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:minichat/auth/auth_gate.dart';
+import 'package:minichat/auth/auth_service.dart';
 import 'package:minichat/pages/auth/register_page.dart';
-import 'package:minichat/pages/main_page.dart';
 import 'package:minichat/widgets/app_title.dart';
 import 'package:minichat/widgets/buttons/common_button.dart';
+import 'package:minichat/widgets/common_alert_dialog.dart';
 import 'package:minichat/widgets/fields/icon_text_field.dart';
 import 'package:minichat/widgets/fields/password_field.dart';
 
@@ -14,12 +16,40 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
 
   // login method
-  void login(context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const MainPage(),
-      ),
-    );
+  void login(context) async {
+    // get auth service
+    final authService = AuthService();
+
+    // try login
+    try {
+      await authService.signInWithEmailPassword(
+        _emailController.text,
+        _passwordController.text,
+      );
+      // navigate to main page
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const AuthGate(),
+        ),
+      );
+    }
+
+    // catch errors
+    catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return CommonAlertDialog(
+            title: const Text(
+              "Error",
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+            ),
+            content: Text(e.toString()),
+            buttonColor: Colors.red.shade200,
+          );
+        },
+      );
+    }
   }
 
   @override
