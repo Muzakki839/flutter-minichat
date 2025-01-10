@@ -12,6 +12,11 @@ class AppTitle extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Icon(
+          Icons.chat,
+          color: theme.primary,
+        ),
+        SizedBox(width: 3),
         Text(
           "Mini",
           style: TextStyle(
@@ -25,7 +30,7 @@ class AppTitle extends StatelessWidget {
             color: theme.primary,
             fontWeight: FontWeight.normal,
           ),
-        )
+        ),
       ],
     );
   }
