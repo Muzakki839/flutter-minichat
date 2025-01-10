@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:minichat/pages/chats_page.dart';
-import 'package:minichat/pages/contacts_page.dart';
-import 'package:minichat/pages/tools_page.dart';
+import 'package:minichat/pages/contents/chats_page.dart';
+import 'package:minichat/pages/contents/contacts_page.dart';
+import 'package:minichat/pages/auth/login_page.dart';
+import 'package:minichat/pages/contents/tools_page.dart';
 import 'package:minichat/widgets/app_title.dart';
 import 'package:minichat/widgets/bottom_tab_bar.dart';
 
@@ -47,10 +48,24 @@ class _MainPageState extends State<MainPage>
 
     return Scaffold(
       appBar: AppBar(
-        title: AppTitle(),
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: AppTitle(scale: 1.2),
+        ),
         actions: [
           PopupMenuButton<String>(
-            onSelected: (value) {},
+            onSelected: (value) {
+              switch (value) {
+                case "logout":
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginPage(),
+                    ),
+                  );
+                  break;
+                default:
+              }
+            },
             itemBuilder: (context) => [
               PopupMenuItem(
                 value: 'logout',
