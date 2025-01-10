@@ -59,7 +59,7 @@ class _MainPageState extends State<MainPage>
                 case "logout":
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
+                      builder: (context) => LoginPage(),
                     ),
                   );
                   break;

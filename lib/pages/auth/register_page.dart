@@ -7,7 +7,22 @@ import 'package:minichat/widgets/fields/icon_text_field.dart';
 import 'package:minichat/widgets/fields/password_field.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
+
+  // field controllers
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  // register method
+  void register(context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const MainPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,29 +63,23 @@ class RegisterPage extends StatelessWidget {
                   theme: theme,
                   label: "Email",
                   prefixIcon: const Icon(Icons.email),
-                  controller: TextEditingController(),
+                  controller: _emailController,
                 ),
                 PasswordField(
                   theme: theme,
                   label: "Password",
-                  controller: TextEditingController(),
+                  controller: _passwordController,
                 ),
                 PasswordField(
                   theme: theme,
                   label: "Confirm Password",
-                  controller: TextEditingController(),
+                  controller: _confirmPasswordController,
                 ),
                 SizedBox(),
                 CommonButton(
                   theme: theme,
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const MainPage(),
-                      ),
-                    );
-                  },
                   text: "Register",
+                  onPressed: () => register(context),
                   backgroundColor: theme.primary,
                 )
               ],
@@ -92,7 +101,7 @@ class RegisterPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const LoginPage(),
+                      builder: (context) => LoginPage(),
                     ),
                   );
                 },

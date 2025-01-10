@@ -7,7 +7,20 @@ import 'package:minichat/widgets/fields/icon_text_field.dart';
 import 'package:minichat/widgets/fields/password_field.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  // field controllers
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // login method
+  void login(context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const MainPage(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,24 +61,18 @@ class LoginPage extends StatelessWidget {
                   theme: theme,
                   label: "Email",
                   prefixIcon: const Icon(Icons.email),
-                  controller: TextEditingController(),
+                  controller: _emailController,
                 ),
                 PasswordField(
                   theme: theme,
                   label: "Password",
-                  controller: TextEditingController(),
+                  controller: _passwordController,
                 ),
                 SizedBox(),
                 CommonButton(
                   theme: theme,
-                  onPressed: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const MainPage(),
-                      ),
-                    );
-                  },
                   text: "Login",
+                  onPressed: () => login(context),
                   backgroundColor: theme.primary,
                 )
               ],
@@ -87,7 +94,7 @@ class LoginPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const RegisterPage(),
+                      builder: (context) => RegisterPage(),
                     ),
                   );
                 },
