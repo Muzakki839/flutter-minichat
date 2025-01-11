@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minichat/auth/auth_service.dart';
+import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/pages/contents/chats_page.dart';
 import 'package:minichat/pages/contents/contacts_page.dart';
 import 'package:minichat/pages/contents/tools_page.dart';

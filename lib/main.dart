@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:minichat/auth/auth_gate.dart';
+import 'package:minichat/services/auth/auth_gate.dart';
 import 'package:minichat/firebase_options.dart';
 
 void main() async {
