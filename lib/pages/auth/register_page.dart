@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:minichat/auth/auth_gate.dart';
+import 'package:minichat/auth/auth_service.dart';
 import 'package:minichat/pages/auth/login_page.dart';
-import 'package:minichat/pages/main_page.dart';
 import 'package:minichat/widgets/app_title.dart';
 import 'package:minichat/widgets/buttons/common_button.dart';
+import 'package:minichat/widgets/common_alert_dialog.dart';
 import 'package:minichat/widgets/fields/icon_text_field.dart';
 import 'package:minichat/widgets/fields/password_field.dart';
 
@@ -16,12 +18,55 @@ class RegisterPage extends StatelessWidget {
       TextEditingController();
 
   // register method
-  void register(context) {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const MainPage(),
-      ),
-    );
+  void register(context) async {
+    // get auth service
+    final authService = AuthService();
+
+    // password match -> create user
+    if (_passwordController.text == _confirmPasswordController.text) {
+      // try sign up
+      try {
+        await authService.signUpWithEmailPassword(
+          _emailController.text,
+          _passwordController.text,
+        );
+        // navigate to main page
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const AuthGate(),
+          ),
+        );
+      }
+
+      // catch errors
+      catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => CommonAlertDialog(
+            title: const Text(
+              "Error",
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+            ),
+            content: Text(e.toString()),
+            buttonColor: Colors.red.shade200,
+          ),
+        );
+      }
+    }
+    // password not match -> tell to fix
+    else {
+      showDialog(
+        context: context,
+        builder: (context) => CommonAlertDialog(
+          title: const Text(
+            "Error",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+          ),
+          content: Text("Password not match"),
+          buttonColor: Colors.red.shade200,
+        ),
+      );
+    }
   }
 
   @override
