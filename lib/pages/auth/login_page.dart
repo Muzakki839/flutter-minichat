@@ -38,16 +38,14 @@ class LoginPage extends StatelessWidget {
     catch (e) {
       showDialog(
         context: context,
-        builder: (context) {
-          return CommonAlertDialog(
-            title: const Text(
-              "Error",
-              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-            ),
-            content: Text(e.toString()),
-            buttonColor: Colors.red.shade200,
-          );
-        },
+        builder: (context) => CommonAlertDialog(
+          title: const Text(
+            "Error",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+          ),
+          content: Text(e.toString()),
+          buttonColor: Colors.red.shade200,
+        ),
       );
     }
   }
