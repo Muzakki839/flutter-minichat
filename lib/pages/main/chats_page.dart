@@ -52,20 +52,24 @@ class ChatsPage extends StatelessWidget {
     BuildContext context,
   ) {
     // display each user (except current user)
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: UserTile(
-        text: userData["email"],
-        onTap: () {
-          // navigate to chat page
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChatPage(selectedUser: userData["email"]),
-            ),
-          );
-        },
-      ),
-    );
+    if (userData["email"] != _authService.getCurrentUser()!.email) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: UserTile(
+          text: userData["email"],
+          onTap: () {
+            // navigate to chat page
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChatPage(selectedUser: userData["email"]),
+              ),
+            );
+          },
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 }
