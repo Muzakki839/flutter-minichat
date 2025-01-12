@@ -89,15 +89,15 @@ class _ContactsPageState extends State<ContactsPage> {
       child: ListView.builder(
         itemCount: contactsDb.contacts.length,
         itemBuilder: (context, index) =>
-            _buildContactItem(contactsDb.contacts[index]['name']),
+            _buildContactItem(contactsDb.contacts[index]),
       ),
     );
   }
 
-  Widget _buildContactItem(String name) {
-    // TODO: load individual contact data
+  Widget _buildContactItem(Map<String, dynamic> contact) {
     return UserTile(
-      text: name,
+      text: contact['name'],
+      subText: contact['email'],
       onTap: () {},
     );
   }

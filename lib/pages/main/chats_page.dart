@@ -3,7 +3,7 @@ import 'package:minichat/pages/content/chat_page.dart';
 import 'package:minichat/pages/content/profile_page.dart';
 import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/services/chat/chat_service.dart';
-import 'package:minichat/widgets/item/user_tile.dart';
+import 'package:minichat/widgets/item/chatroom_tile.dart';
 import 'package:minichat/widgets/utilities/app_title.dart';
 
 class ChatsPage extends StatelessWidget {
@@ -107,7 +107,7 @@ class ChatsPage extends StatelessWidget {
   ) {
     // display each user (except current user)
     if (userData["email"] != _authService.getCurrentUser()!.email) {
-      return UserTile(
+      return ChatroomTile(
         text: userData["email"],
         onTap: () {
           // navigate to chat page

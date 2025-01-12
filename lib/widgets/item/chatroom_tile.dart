@@ -1,16 +1,14 @@
 // import 'dart:math';
 import 'package:flutter/material.dart';
 
-class UserTile extends StatelessWidget {
-  const UserTile({
+class ChatroomTile extends StatelessWidget {
+  const ChatroomTile({
     super.key,
     required this.text,
     this.onTap,
-    required this.subText,
   });
 
   final String text;
-  final String subText;
   final void Function()? onTap;
 
   @override
@@ -24,7 +22,6 @@ class UserTile extends StatelessWidget {
         child: Icon(Icons.person, color: theme.onPrimary),
       ),
       title: Text(text, style: TextStyle(color: theme.scrim)),
-      subtitle: Text(subText, style: TextStyle(color: theme.scrim)),
       onTap: onTap,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
