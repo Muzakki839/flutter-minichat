@@ -58,8 +58,8 @@ class _MainPageState extends State<MainPage>
     return Scaffold(
       appBar: AppBar(
         title: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: AppTitle(scale: 1.2),
+          padding: const EdgeInsets.all(20),
+          child: AppTitle(scale: 1.3),
         ),
         actions: [
           PopupMenuButton<String>(
