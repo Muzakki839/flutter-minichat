@@ -142,6 +142,10 @@ class ChatPage extends StatelessWidget {
                 child: CommonTextField(
                   hintText: "Type message here",
                   controller: _messageController,
+                  onSubmitted: (text) {
+                    _messageController.text;
+                    sendMessage();
+                  },
                 ),
               ),
             ),

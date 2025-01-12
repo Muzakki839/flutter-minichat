@@ -5,10 +5,12 @@ class CommonTextField extends StatelessWidget {
     super.key,
     required this.controller,
     required this.hintText,
+    this.onSubmitted,
   });
 
   final String hintText;
   final TextEditingController controller;
+  final void Function(String)? onSubmitted;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class CommonTextField extends StatelessWidget {
       ),
       style: TextStyle(color: theme.onPrimary), // Set input text color
       cursorColor: theme.onPrimary,
+      onSubmitted: onSubmitted,
       controller: controller,
     );
   }
