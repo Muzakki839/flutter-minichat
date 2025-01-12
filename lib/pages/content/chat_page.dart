@@ -79,7 +79,7 @@ class ChatPage extends StatelessWidget {
 
         // loading
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         }
 
         // return listView
