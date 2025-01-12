@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minichat/pages/content/chat_page.dart';
+import 'package:minichat/pages/content/profile_page.dart';
 import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/services/chat/chat_service.dart';
 import 'package:minichat/widgets/item/user_tile.dart';
@@ -36,16 +37,21 @@ class ChatsPage extends StatelessWidget {
           PopupMenuButton<String>(
             onSelected: (value) {
               switch (value) {
-                case "logout":
-                  logout(context);
+                case "profile":
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
+                  );
+                  break;
+                case "about":
                   break;
                 default:
               }
             },
             itemBuilder: (context) => [
               PopupMenuItem(
-                value: 'logout',
-                child: Text('Logout'),
+                value: 'profile',
+                child: Text('Profile'),
               ),
               PopupMenuItem(
                 value: 'about',
