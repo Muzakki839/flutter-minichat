@@ -3,8 +3,8 @@ import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/pages/main/chats_page.dart';
 import 'package:minichat/pages/main/contacts_page.dart';
 import 'package:minichat/pages/main/tools_page.dart';
-import 'package:minichat/widgets/app_title.dart';
-import 'package:minichat/widgets/bottom_tab_bar.dart';
+import 'package:minichat/widgets/utilities/app_title.dart';
+import 'package:minichat/widgets/utilities/bottom_tab_bar.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key, this.initialTabIndex = 0});
