@@ -216,6 +216,7 @@ class _ChatPageState extends State<ChatPage> {
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
                 child: CommonTextField(
                   hintText: "Type message here",
+                  textColor: theme.onPrimary,
                   controller: _messageController,
                   onSubmitted: (text) {
                     _messageController.text;

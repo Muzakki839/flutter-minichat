@@ -7,7 +7,14 @@ class CommonTextField extends StatelessWidget {
     required this.hintText,
     this.onSubmitted,
     this.focusNode,
+    this.textColor,
+    this.backgroundColor,
+    this.inputBorder,
   });
+
+  final Color? textColor;
+  final Color? backgroundColor;
+  final InputBorder? inputBorder;
 
   final String hintText;
   final TextEditingController controller;
@@ -21,12 +28,12 @@ class CommonTextField extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: theme.onPrimary),
-        border: InputBorder.none,
-        enabledBorder: InputBorder.none,
+        hintStyle: TextStyle(color: textColor ?? theme.secondary),
+        border: inputBorder ?? InputBorder.none,
+        enabledBorder: inputBorder ?? InputBorder.none,
       ),
-      style: TextStyle(color: theme.onPrimary), // Set input text color
-      cursorColor: theme.onPrimary,
+      style: TextStyle(color: textColor ?? theme.scrim), // Set input text color
+      cursorColor: textColor ?? theme.scrim,
       onSubmitted: onSubmitted,
       onTapOutside: (event) {
         focusNode?.unfocus();

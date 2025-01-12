@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minichat/pages/main_page.dart';
+import 'package:minichat/pages/content/add_contact_page.dart';
 import 'package:minichat/widgets/item/user_tile.dart';
 
 class ContactsPage extends StatelessWidget {
@@ -47,7 +47,7 @@ class ContactsPage extends StatelessWidget {
                     // TODO: create add_contact_page.dart
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MainPage()),
+                      MaterialPageRoute(builder: (context) => AddContactPage()),
                     );
                   },
                   backgroundColor: theme.onPrimary,
