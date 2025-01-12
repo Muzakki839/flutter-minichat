@@ -3,19 +3,19 @@ import 'package:flutter/material.dart';
 class IconTextField extends StatelessWidget {
   const IconTextField({
     super.key,
-    required this.theme,
     required this.label,
     required this.prefixIcon,
     required this.controller,
   });
 
-  final ColorScheme theme;
   final String label;
   final Icon prefixIcon;
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
     return TextField(
       decoration: InputDecoration(
         label: Text(label),

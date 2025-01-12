@@ -86,13 +86,11 @@ class LoginPage extends StatelessWidget {
               spacing: 20,
               children: [
                 IconTextField(
-                  theme: theme,
                   label: "Email",
                   prefixIcon: const Icon(Icons.email),
                   controller: _emailController,
                 ),
                 PasswordField(
-                  theme: theme,
                   label: "Password",
                   controller: _passwordController,
                 ),

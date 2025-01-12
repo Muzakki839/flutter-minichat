@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 class PasswordField extends StatefulWidget {
   const PasswordField({
     super.key,
-    required this.theme,
     required this.controller,
     required this.label,
   });
 
-  final ColorScheme theme;
   final String label;
   final TextEditingController controller;
 
@@ -27,6 +25,8 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
     return TextField(
       decoration: InputDecoration(
         label: Text(widget.label),
@@ -42,7 +42,7 @@ class _PasswordFieldState extends State<PasswordField> {
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: widget.theme.primary,
+              color: theme.primary,
               width: 1,
             ),
             borderRadius: BorderRadius.circular(10)),
