@@ -1,9 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:minichat/main.dart';
 import 'package:minichat/widgets/buttons/common_button.dart';
 import 'package:minichat/widgets/fields/common_text_field.dart';
+import 'package:minichat/widgets/utilities/common_alert_dialog.dart';
 
 class AddContactPage extends StatelessWidget {
-  const AddContactPage({super.key});
+  AddContactPage({super.key});
+
+  // text controllers
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+  // get initiated contactsDb
+  final contactsDb = MyApp.contactsData;
+
+  // add contact method
+  void addContact(BuildContext context) {
+    final emailPattern = r'^[^@]+@[^@]+\.[^@]+';
+    final regExp = RegExp(emailPattern);
+
+    // validate
+    if (_emailController.text.isNotEmpty && _nameController.text.isNotEmpty) {
+      if (regExp.hasMatch(_emailController.text)) {
+        _saveContact(context);
+      } else {
+        _showErrorDialog(context, "Invalid email format");
+      }
+    } else {
+      _showErrorDialog(context, "Name & Email couldn't be empty");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +68,7 @@ class AddContactPage extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: CommonButton(
               theme: theme,
-              onPressed: () {},
+              onPressed: () => addContact(context),
               text: "Add",
               backgroundColor: theme.primary,
             ),
@@ -80,12 +106,12 @@ class AddContactPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 10,
         children: [
-          Text("Nama",
+          Text("Name",
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
           CommonTextField(
             hintText: "' e.g. Budi '",
             inputBorder: UnderlineInputBorder(),
-            controller: TextEditingController(),
+            controller: _nameController,
           ),
           SizedBox(height: 40),
           Text("Email",
@@ -93,10 +119,33 @@ class AddContactPage extends StatelessWidget {
           CommonTextField(
             hintText: "' e.g. Budi123@email.com '",
             inputBorder: UnderlineInputBorder(),
-            controller: TextEditingController(),
+            controller: _emailController,
           ),
           SizedBox(height: 40),
         ],
+      ),
+    );
+  }
+
+  // save to db
+  void _saveContact(BuildContext context) {
+    contactsDb.contacts.add({
+      'name': _nameController.text,
+      'email': _emailController.text,
+    });
+    contactsDb.updateDatabase();
+    Navigator.pop(context);
+  }
+
+  // preset error alert
+  void _showErrorDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => CommonAlertDialog(
+        title: const Text("Error",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+        content: Text(message),
+        buttonColor: Colors.red.shade200,
       ),
     );
   }

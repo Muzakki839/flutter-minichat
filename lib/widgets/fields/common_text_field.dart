@@ -24,6 +24,7 @@ class CommonTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
+    final FocusNode defaultFocusNode = FocusNode();
 
     return TextField(
       decoration: InputDecoration(
@@ -37,9 +38,10 @@ class CommonTextField extends StatelessWidget {
       onSubmitted: onSubmitted,
       onTapOutside: (event) {
         focusNode?.unfocus();
+        defaultFocusNode.unfocus();
       },
       controller: controller,
-      focusNode: focusNode,
+      focusNode: focusNode ?? defaultFocusNode,
     );
   }
 }

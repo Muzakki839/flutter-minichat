@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:minichat/main.dart';
 import 'package:minichat/pages/content/add_contact_page.dart';
 import 'package:minichat/widgets/item/user_tile.dart';
 
 class ContactsPage extends StatelessWidget {
-  const ContactsPage({super.key});
+  ContactsPage({super.key});
+
+  // get initiated contactsDb
+  final contactsDb = MyApp.contactsData;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,6 @@ class ContactsPage extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   onPressed: () {
-                    // TODO: create add_contact_page.dart
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => AddContactPage()),
@@ -63,22 +66,20 @@ class ContactsPage extends StatelessWidget {
   }
 
   Widget _buildContactList() {
-    // TODO: load contact list using streambuilder from hive box
     return Padding(
       padding: const EdgeInsets.only(top: 0, bottom: 20, left: 5, right: 5),
       child: ListView.builder(
-        itemBuilder: (context, index) {
-          return _buildContactItem();
-        },
-        itemCount: 30,
+        itemCount: contactsDb.contacts.length,
+        itemBuilder: (context, index) =>
+            _buildContactItem(contactsDb.contacts[index]['name']),
       ),
     );
   }
 
-  Widget _buildContactItem() {
+  Widget _buildContactItem(String name) {
     // TODO: load individual contact data
     return UserTile(
-      text: "data",
+      text: name,
       onTap: () {},
     );
   }
