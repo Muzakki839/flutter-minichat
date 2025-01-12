@@ -27,6 +27,9 @@ class ContactsData {
 
   // load data from db
   void getData() {
-    contacts = _dataBox.get("CONTACTS");
+    final data = _dataBox.get("CONTACTS");
+    contacts = (data as List)
+        .map((item) => Map<String, dynamic>.from(item as Map))
+        .toList();
   }
 }

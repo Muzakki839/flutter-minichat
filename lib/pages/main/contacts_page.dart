@@ -3,11 +3,29 @@ import 'package:minichat/main.dart';
 import 'package:minichat/pages/content/add_contact_page.dart';
 import 'package:minichat/widgets/item/user_tile.dart';
 
-class ContactsPage extends StatelessWidget {
-  ContactsPage({super.key});
+class ContactsPage extends StatefulWidget {
+  const ContactsPage({super.key});
 
+  @override
+  State<ContactsPage> createState() => _ContactsPageState();
+}
+
+class _ContactsPageState extends State<ContactsPage> {
   // get initiated contactsDb
   final contactsDb = MyApp.contactsData;
+
+  // sort alphabetically
+  void sortContacts() {
+    contactsDb.contacts.sort(
+      (a, b) => a['name'].toLowerCase().compareTo(b['name'].toLowerCase()),
+    );
+  }
+
+  @override
+  void initState() {
+    sortContacts();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
