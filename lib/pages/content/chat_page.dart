@@ -37,13 +37,13 @@ class _ChatPageState extends State<ChatPage> {
         // then calculate remaining height
         // then run scrollDown() method
         if (_focusNode.hasFocus) {
-          Future.delayed(Durations.long3, () => scrollDown());
+          Future.delayed(Durations.extralong1, () => scrollDown());
         }
       },
     );
 
     // wait until lisview to be build then scrollDown()
-    Future.delayed(Durations.long3, () => scrollDown());
+    Future.delayed(Durations.extralong1, () => scrollDown());
   }
 
   @override
