@@ -120,28 +120,29 @@ class ChatPage extends StatelessWidget {
 
     // specify style message for sender or receiver
     var alignment =
-      isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+        isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
     Color color =
-      isCurrentUser ? theme.primaryContainer : theme.secondaryContainer;
+        isCurrentUser ? theme.primaryContainer : theme.secondaryContainer;
     var margin = isCurrentUser
-      ? EdgeInsets.only(top: 10, left: 10, right: 0)
-      : EdgeInsets.only(top: 10, left: 0, right: 10);
+        ? EdgeInsets.only(top: 10, left: 10, right: 0)
+        : EdgeInsets.only(top: 10, left: 0, right: 10);
 
     // return message item
     return Align(
       alignment: alignment,
       child: Container(
-      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-      margin: margin,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Text(
-        data["message"],
-        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-      ),
+        constraints:
+            BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        margin: margin,
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Text(
+          data["message"],
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+        ),
       ),
     );
   }
