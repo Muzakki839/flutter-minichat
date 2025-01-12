@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/pages/main/chats_page.dart';
 import 'package:minichat/pages/main/contacts_page.dart';
 import 'package:minichat/pages/main/tools_page.dart';
-import 'package:minichat/widgets/utilities/app_title.dart';
 import 'package:minichat/widgets/utilities/bottom_tab_bar.dart';
 
 class MainPage extends StatefulWidget {
@@ -46,48 +44,7 @@ class _MainPageState extends State<MainPage>
       ToolsPage(),
     ];
 
-    // logout method
-    void logout(context) {
-      // get auth service
-      final authService = AuthService();
-
-      // sign out
-      authService.signOut();
-    }
-
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.all(20),
-          child: AppTitle(scale: 1.3),
-        ),
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              switch (value) {
-                case "logout":
-                  logout(context);
-                  break;
-                default:
-              }
-            },
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 'logout',
-                child: Text('Logout'),
-              ),
-              PopupMenuItem(
-                value: 'about',
-                child: Text('About'),
-              ),
-            ],
-            icon: const Icon(Icons.more_vert),
-            offset: Offset(0, 40),
-            color: theme.surfaceContainerLowest,
-          ),
-        ],
-      ),
-
       // bottom tab bar
       floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
       floatingActionButton: BottomTabBar(
@@ -99,7 +56,7 @@ class _MainPageState extends State<MainPage>
           ),
           Tab(
             text: "Contacts",
-            icon: Icon(Icons.people_outlined),
+            icon: Icon(Icons.contacts_outlined),
           ),
           Tab(
             text: "Tools",

@@ -10,6 +10,26 @@ class ContactsPage extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
 
     return Scaffold(
+      // contacts page title
+      appBar: AppBar(
+        title: Transform.scale(
+          scale: 1.2,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 10,
+            children: [
+              Icon(Icons.contacts_rounded, color: theme.primary),
+              Text(
+                "Contacts",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: theme.primary),
+              ),
+            ],
+          ),
+        ),
+      ),
+
+      // show contact list
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -45,7 +65,7 @@ class ContactsPage extends StatelessWidget {
   Widget _buildContactList() {
     // TODO: load contact list using streambuilder from hive box
     return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 0, left: 5, right: 5),
+      padding: const EdgeInsets.only(top: 0, bottom: 20, left: 5, right: 5),
       child: ListView.builder(
         itemBuilder: (context, index) {
           return _buildContactItem();

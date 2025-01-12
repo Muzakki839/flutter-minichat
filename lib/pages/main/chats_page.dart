@@ -3,6 +3,7 @@ import 'package:minichat/pages/content/chat_page.dart';
 import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/services/chat/chat_service.dart';
 import 'package:minichat/widgets/item/user_tile.dart';
+import 'package:minichat/widgets/utilities/app_title.dart';
 
 class ChatsPage extends StatelessWidget {
   ChatsPage({super.key});
@@ -11,9 +12,56 @@ class ChatsPage extends StatelessWidget {
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
 
+  // logout method
+  void logout(context) {
+    // get auth service
+    final authService = AuthService();
+
+    // sign out
+    authService.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return _buildUserList();
+    final theme = Theme.of(context).colorScheme;
+
+    return Scaffold(
+      // chats page title
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.all(20),
+          child: AppTitle(scale: 1.3),
+        ),
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              switch (value) {
+                case "logout":
+                  logout(context);
+                  break;
+                default:
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 'logout',
+                child: Text('Logout'),
+              ),
+              PopupMenuItem(
+                value: 'about',
+                child: Text('About'),
+              ),
+            ],
+            icon: const Icon(Icons.more_vert),
+            offset: Offset(0, 40),
+            color: theme.surfaceContainerLowest,
+          ),
+        ],
+      ),
+
+      // show chatRoom list
+      body: _buildUserList(),
+    );
   }
 
   // build a listView of users
@@ -33,7 +81,7 @@ class ChatsPage extends StatelessWidget {
 
         // return listView
         return Padding(
-          padding: const EdgeInsets.only(top: 20, bottom: 0, left: 5, right: 5),
+          padding: const EdgeInsets.only(top: 0, bottom: 20, left: 5, right: 5),
           child: ListView(
             children: snapshot.data!
                 .map<Widget>(
