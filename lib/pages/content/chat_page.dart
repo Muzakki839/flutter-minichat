@@ -4,16 +4,21 @@ import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/services/chat/chat_service.dart';
 import 'package:minichat/widgets/fields/common_text_field.dart';
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   final String receiverName;
   final String receiverID;
 
-  ChatPage({
+  const ChatPage({
     super.key,
     required this.receiverName,
     required this.receiverID,
   });
 
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
   // text controller
   final TextEditingController _messageController = TextEditingController();
 
@@ -21,15 +26,56 @@ class ChatPage extends StatelessWidget {
   final ChatService _chatService = ChatService();
   final AuthService _authService = AuthService();
 
+  @override
+  void initState() {
+    super.initState();
+
+    // add listener to textfield focus node
+    _focusNode.addListener(
+      () {
+        // wait until keyboard show up
+        // then calculate remaining height
+        // then run scrollDown() method
+        if (_focusNode.hasFocus) {
+          Future.delayed(Durations.long3, () => scrollDown());
+        }
+      },
+    );
+
+    // wait until lisview to be build then scrollDown()
+    Future.delayed(Durations.long3, () => scrollDown());
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  // scroll fix
+  final FocusNode _focusNode = FocusNode();
+  final ScrollController _scrollController = ScrollController();
+  void scrollDown() {
+    _scrollController.animateTo(
+      _scrollController.position.extentTotal,
+      duration: Durations.long4,
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
   // send message
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
       // sending message
-      await _chatService.sendMessage(receiverID, _messageController.text);
+      await _chatService.sendMessage(
+          widget.receiverID, _messageController.text);
 
       // reset the text controller
       _messageController.clear();
     }
+
+    scrollDown();
   }
 
   @override
@@ -46,7 +92,7 @@ class ChatPage extends StatelessWidget {
               child: Icon(Icons.person, color: theme.primary),
             ),
             Text(
-              receiverName,
+              widget.receiverName,
               style: TextStyle(color: theme.onPrimary),
             ),
           ],
@@ -71,7 +117,7 @@ class ChatPage extends StatelessWidget {
   Widget _buildMessageList() {
     String senderID = _authService.getCurrentUser()!.uid;
     return StreamBuilder(
-      stream: _chatService.getMessage(senderID, receiverID),
+      stream: _chatService.getMessage(senderID, widget.receiverID),
       builder: (context, snapshot) {
         // errors
         if (snapshot.hasError) {
@@ -89,6 +135,7 @@ class ChatPage extends StatelessWidget {
             padding:
                 const EdgeInsets.only(top: 0, bottom: 80, left: 5, right: 5),
             child: ListView(
+              controller: _scrollController,
               children: snapshot.data!.docs
                   .map<Widget>(
                     (messageDoc) => _buildMessageListItem(messageDoc, context),
@@ -174,6 +221,7 @@ class ChatPage extends StatelessWidget {
                     _messageController.text;
                     sendMessage();
                   },
+                  focusNode: _focusNode,
                 ),
               ),
             ),

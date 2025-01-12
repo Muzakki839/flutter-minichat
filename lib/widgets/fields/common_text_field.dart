@@ -6,11 +6,13 @@ class CommonTextField extends StatelessWidget {
     required this.controller,
     required this.hintText,
     this.onSubmitted,
+    this.focusNode,
   });
 
   final String hintText;
   final TextEditingController controller;
   final void Function(String)? onSubmitted;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,11 @@ class CommonTextField extends StatelessWidget {
       style: TextStyle(color: theme.onPrimary), // Set input text color
       cursorColor: theme.onPrimary,
       onSubmitted: onSubmitted,
+      onTapOutside: (event) {
+        focusNode?.unfocus();
+      },
       controller: controller,
+      focusNode: focusNode,
     );
   }
 }
