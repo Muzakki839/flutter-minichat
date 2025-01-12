@@ -26,6 +26,7 @@ class UserTile extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
+      minTileHeight: 80,
     );
   }
 }

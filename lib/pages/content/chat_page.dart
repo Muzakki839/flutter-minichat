@@ -117,11 +117,13 @@ class ChatPage extends StatelessWidget {
             child: Card(
               color: theme.surfaceContainerLowest,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  side: BorderSide(color: theme.primary)),
-              // elevation: 5,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                // side: BorderSide(color: theme.primary),
+              ),
+              surfaceTintColor: theme.primary,
+              elevation: 5,
               shadowColor: theme.scrim,
               child: Padding(
                 padding:

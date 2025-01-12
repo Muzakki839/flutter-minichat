@@ -12,13 +12,11 @@ class CommonTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).colorScheme;
-
     return TextField(
       decoration: InputDecoration(
         hintText: hintText,
         border: InputBorder.none,
-        enabledBorder:InputBorder.none,
+        enabledBorder: InputBorder.none,
       ),
       controller: controller,
     );

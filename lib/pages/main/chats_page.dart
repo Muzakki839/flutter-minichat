@@ -33,7 +33,7 @@ class ChatsPage extends StatelessWidget {
 
         // return listView
         return Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.only(top: 20, bottom: 0, left: 5, right: 5),
           child: ListView(
             children: snapshot.data!
                 .map<Widget>(
@@ -53,23 +53,20 @@ class ChatsPage extends StatelessWidget {
   ) {
     // display each user (except current user)
     if (userData["email"] != _authService.getCurrentUser()!.email) {
-      return Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: UserTile(
-          text: userData["email"],
-          onTap: () {
-            // navigate to chat page
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ChatPage(
-                  receiverName: userData["email"],
-                  receiverID: userData["uid"],
-                ),
+      return UserTile(
+        text: userData["email"],
+        onTap: () {
+          // navigate to chat page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChatPage(
+                receiverName: userData["email"],
+                receiverID: userData["uid"],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       );
     } else {
       return Container();
