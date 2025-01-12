@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:minichat/services/auth/auth_service.dart';
-import 'package:minichat/pages/contents/chats_page.dart';
-import 'package:minichat/pages/contents/contacts_page.dart';
-import 'package:minichat/pages/contents/tools_page.dart';
+import 'package:minichat/pages/main/chats_page.dart';
+import 'package:minichat/pages/main/contacts_page.dart';
+import 'package:minichat/pages/main/tools_page.dart';
 import 'package:minichat/widgets/app_title.dart';
 import 'package:minichat/widgets/bottom_tab_bar.dart';
 
