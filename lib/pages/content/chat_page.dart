@@ -84,12 +84,15 @@ class ChatPage extends StatelessWidget {
 
         // return listView
         if (snapshot.data!.docs.isNotEmpty) {
-          return ListView(
-            children: snapshot.data!.docs
-                .map<Widget>(
-                  (messageDoc) => _buildMessageListItem(messageDoc),
-                )
-                .toList(),
+          return Padding(
+            padding: const EdgeInsets.all(20),
+            child: ListView(
+              children: snapshot.data!.docs
+                  .map<Widget>(
+                    (messageDoc) => _buildMessageListItem(messageDoc),
+                  )
+                  .toList(),
+            ),
           );
         } else {
           return Center(
@@ -115,14 +118,12 @@ class ChatPage extends StatelessWidget {
           // textfield
           Expanded(
             child: Card(
-              color: theme.surfaceContainerLowest,
+              color: theme.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+                  Radius.circular(26),
                 ),
-                // side: BorderSide(color: theme.primary),
               ),
-              surfaceTintColor: theme.primary,
               elevation: 5,
               shadowColor: theme.scrim,
               child: Padding(
@@ -146,7 +147,7 @@ class ChatPage extends StatelessWidget {
               shadowColor: WidgetStatePropertyAll(theme.scrim),
               padding: WidgetStatePropertyAll(EdgeInsets.all(12)),
               iconSize: WidgetStatePropertyAll(26),
-              // elevation: WidgetStatePropertyAll(5),
+              elevation: WidgetStatePropertyAll(5),
             ),
           ),
         ],

@@ -12,12 +12,17 @@ class CommonTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
+
     return TextField(
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: TextStyle(color: theme.onPrimary),
         border: InputBorder.none,
         enabledBorder: InputBorder.none,
       ),
+      style: TextStyle(color: theme.onPrimary), // Set input text color
+      cursorColor: theme.onPrimary,
       controller: controller,
     );
   }
