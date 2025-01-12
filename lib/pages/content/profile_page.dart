@@ -103,7 +103,6 @@ class ProfilePage extends StatelessWidget {
             _authService.getCurrentUser()!.email.toString(),
             style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
           ),
-          SizedBox(height: 40),
         ],
       ),
     );

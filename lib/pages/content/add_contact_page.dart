@@ -31,9 +31,23 @@ class AddContactPage extends StatelessWidget {
         // centerTitle: true,
       ),
 
-      //
+      // root content
       body: Column(
-        children: [Expanded(child: _buildPageContent(theme))],
+        children: [
+          // main
+          Expanded(child: _buildPageContent(theme)),
+
+          // footer
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: CommonButton(
+              theme: theme,
+              onPressed: () {},
+              text: "Add",
+              backgroundColor: theme.primary,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -82,12 +96,6 @@ class AddContactPage extends StatelessWidget {
             controller: TextEditingController(),
           ),
           SizedBox(height: 40),
-          CommonButton(
-            theme: theme,
-            onPressed: () {},
-            text: "Add",
-            backgroundColor: theme.primary,
-          )
         ],
       ),
     );
