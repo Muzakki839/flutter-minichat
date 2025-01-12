@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minichat/main.dart';
+import 'package:minichat/pages/main_page.dart';
 import 'package:minichat/widgets/buttons/common_button.dart';
 import 'package:minichat/widgets/fields/common_text_field.dart';
 import 'package:minichat/widgets/utilities/common_alert_dialog.dart';
@@ -135,6 +136,13 @@ class AddContactPage extends StatelessWidget {
     });
     contactsDb.updateDatabase();
     Navigator.pop(context);
+    // make sure reload list
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MainPage(initialTabIndex: 1),
+      ),
+    );
   }
 
   // preset error alert
