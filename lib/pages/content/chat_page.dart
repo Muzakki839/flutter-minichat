@@ -55,7 +55,8 @@ class ChatPage extends StatelessWidget {
         backgroundColor: theme.primary,
         foregroundColor: theme.onPrimary,
       ),
-      body: Column(
+      body: Stack(
+        alignment: Alignment.bottomCenter,
         children: [
           // show all message
           Expanded(child: _buildMessageList()),
@@ -85,11 +86,12 @@ class ChatPage extends StatelessWidget {
         // return listView
         if (snapshot.data!.docs.isNotEmpty) {
           return Padding(
-            padding: const EdgeInsets.all(20),
+            padding:
+                const EdgeInsets.only(top: 0, bottom: 80, left: 5, right: 5),
             child: ListView(
               children: snapshot.data!.docs
                   .map<Widget>(
-                    (messageDoc) => _buildMessageListItem(messageDoc),
+                    (messageDoc) => _buildMessageListItem(messageDoc, context),
                   )
                   .toList(),
             ),
@@ -103,19 +105,44 @@ class ChatPage extends StatelessWidget {
     );
   }
 
-  Widget _buildMessageListItem(DocumentSnapshot messageDoc) {
+  Widget _buildMessageListItem(
+    DocumentSnapshot messageDoc,
+    BuildContext context,
+  ) {
+    final theme = Theme.of(context).colorScheme;
+
+    // assign the message data
     Map<String, dynamic> data = messageDoc.data() as Map<String, dynamic>;
 
     // check if the message from current user
     bool isCurrentUser =
         messageDoc['senderID'] == _authService.getCurrentUser()!.uid;
 
-    // specify aligment message for sender or receiever
-    var aligment = isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+    // specify style message for sender or receiver
+    var alignment =
+      isCurrentUser ? Alignment.centerRight : Alignment.centerLeft;
+    Color color =
+      isCurrentUser ? theme.primaryContainer : theme.secondaryContainer;
+    var margin = isCurrentUser
+      ? EdgeInsets.only(top: 10, left: 10, right: 0)
+      : EdgeInsets.only(top: 10, left: 0, right: 10);
 
-    return Container(
-      alignment: aligment,
-      child: Text(data["message"]),
+    // return message item
+    return Align(
+      alignment: alignment,
+      child: Container(
+      constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.75),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      margin: margin,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Text(
+        data["message"],
+        style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+      ),
+      ),
     );
   }
 
