@@ -83,11 +83,10 @@ class AddContactPage extends StatelessWidget {
     return ListView(
       children: [
         Container(
-          padding: EdgeInsets.all(130),
+          padding: EdgeInsets.only(top: 110, bottom: 130),
           child: Transform.scale(
-            scale: 5,
+            scale: 4.5,
             child: CircleAvatar(
-              // backgroundColor: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(255),
               backgroundColor: theme.tertiary,
               child: Icon(Icons.person, color: theme.onPrimary),
             ),

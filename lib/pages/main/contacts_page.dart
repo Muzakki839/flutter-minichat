@@ -97,7 +97,7 @@ class _ContactsPageState extends State<ContactsPage> {
 
   Widget _buildContactList() {
     return Padding(
-      padding: const EdgeInsets.only(top: 0, bottom: 20, left: 5, right: 5),
+      padding: const EdgeInsets.only(top: 20, bottom: 20, left: 5, right: 5),
       child: ListView.builder(
         itemCount: contactsDb.contacts.length,
         itemBuilder: (context, index) =>
