@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minichat/apps/youtube_player/youtube_player_page.dart';
 import 'package:minichat/widgets/items/grid_tile_button.dart';
 
 class ToolsPage extends StatelessWidget {
@@ -38,7 +39,12 @@ class ToolsPage extends StatelessWidget {
             nameText: "Youtube Player",
             icon: Icons.play_circle_fill_rounded,
             iconColor: theme.error,
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => YoutubePlayerPage()),
+              );
+            },
           ),
           Card.outlined(),
           Card.outlined(),
