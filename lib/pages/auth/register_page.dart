@@ -4,7 +4,7 @@ import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/pages/auth/login_page.dart';
 import 'package:minichat/widgets/utilities/app_title.dart';
 import 'package:minichat/widgets/buttons/common_button.dart';
-import 'package:minichat/widgets/utilities/common_alert_dialog.dart';
+import 'package:minichat/widgets/popups/common_alert_dialog.dart';
 import 'package:minichat/widgets/fields/icon_text_field.dart';
 import 'package:minichat/widgets/fields/password_field.dart';
 

@@ -3,7 +3,7 @@ import 'package:minichat/main.dart';
 import 'package:minichat/pages/main_page.dart';
 import 'package:minichat/widgets/buttons/common_button.dart';
 import 'package:minichat/widgets/fields/common_text_field.dart';
-import 'package:minichat/widgets/utilities/common_alert_dialog.dart';
+import 'package:minichat/widgets/popups/common_alert_dialog.dart';
 
 class AddContactPage extends StatelessWidget {
   AddContactPage({super.key});

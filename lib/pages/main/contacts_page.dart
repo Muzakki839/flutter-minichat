@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:minichat/main.dart';
 import 'package:minichat/pages/content/add_contact_page.dart';
-import 'package:minichat/widgets/item/user_tile.dart';
+import 'package:minichat/widgets/items/user_tile.dart';
+import 'package:minichat/widgets/popups/common_alert_dialog.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({super.key});
@@ -16,9 +18,19 @@ class _ContactsPageState extends State<ContactsPage> {
 
   // sort alphabetically
   void sortContacts() {
-    contactsDb.contacts.sort(
-      (a, b) => a['name'].toLowerCase().compareTo(b['name'].toLowerCase()),
-    );
+    setState(() {
+      contactsDb.contacts.sort(
+        (a, b) => a['name'].toLowerCase().compareTo(b['name'].toLowerCase()),
+      );
+    });
+  }
+
+  // delete contact
+  void deleteContact(int index) {
+    setState(() {
+      contactsDb.contacts.removeAt(index);
+      contactsDb.updateDatabase();
+    });
   }
 
   @override
@@ -89,16 +101,53 @@ class _ContactsPageState extends State<ContactsPage> {
       child: ListView.builder(
         itemCount: contactsDb.contacts.length,
         itemBuilder: (context, index) =>
-            _buildContactItem(contactsDb.contacts[index]),
+            _buildContactItem(contactsDb.contacts[index], context, index),
       ),
     );
   }
 
-  Widget _buildContactItem(Map<String, dynamic> contact) {
-    return UserTile(
-      text: contact['name'],
-      subText: contact['email'],
-      onTap: () {},
+  Widget _buildContactItem(
+    Map<String, dynamic> contact,
+    BuildContext context,
+    int index,
+  ) {
+    final theme = Theme.of(context).colorScheme;
+
+    return Slidable(
+      endActionPane: ActionPane(
+        motion: StretchMotion(),
+        extentRatio: 0.15,
+        closeThreshold: 0.1,
+        openThreshold: 0.9,
+        children: [
+          // slidable item
+          IconButton(
+            onPressed: () {
+              showAdaptiveDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CommonAlertDialog(
+                    title: Text("Delete Contact"),
+                    content:
+                        Text("Are you sure you want to delete this contact?"),
+                    buttonColor: theme.errorContainer,
+                  );
+                },
+              );
+            },
+            icon: Icon(Icons.delete_forever_rounded),
+            iconSize: 30,
+            color: theme.error,
+          ),
+        ],
+      ),
+
+      // user tile
+      child: UserTile(
+        text: contact['name'],
+        subText: contact['email'],
+        onTap: () {},
+      ),
     );
   }
 }

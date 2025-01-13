@@ -15,9 +15,9 @@ class ProfilePage extends StatelessWidget {
     final authService = AuthService();
 
     // sign out
+    Navigator.pop(context);
     authService.signOut();
     main();
-    Navigator.pop(context);
   }
 
   @override

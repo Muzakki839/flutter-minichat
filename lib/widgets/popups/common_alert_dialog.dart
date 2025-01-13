@@ -36,7 +36,7 @@ class CommonAlertDialog extends StatelessWidget {
           Radius.circular(10),
         ),
       ),
-      actionsPadding: EdgeInsets.all(10),
+      actionsPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
     );
   }
 }
