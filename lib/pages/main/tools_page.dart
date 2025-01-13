@@ -38,7 +38,7 @@ class ToolsPage extends StatelessWidget {
           GridTileButton(
             nameText: "Youtube Player",
             icon: Icons.play_circle_fill_rounded,
-            iconColor: theme.error,
+            iconColor: Colors.red.shade700,
             onTap: () {
               Navigator.push(
                 context,
@@ -46,10 +46,28 @@ class ToolsPage extends StatelessWidget {
               );
             },
           ),
-          Card.outlined(),
-          Card.outlined(),
-          Card.outlined(),
-          Card.outlined(),
+          GridTileButton(
+            nameText: "Calculator",
+            icon: Icons.calculate_rounded,
+            iconColor: Colors.blue.shade700,
+            onTap: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => ),
+              // );
+            },
+          ),
+          GridTileButton(
+            nameText: "Converter",
+            icon: Icons.swap_horizontal_circle_rounded,
+            iconColor: Colors.purple.shade600,
+            onTap: () {
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => ),
+              // );
+            },
+          ),
         ],
       ),
     );

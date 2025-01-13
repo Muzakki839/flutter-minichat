@@ -76,11 +76,13 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   spacing: 10,
                   children: [
-                    Icon(Icons.play_circle_outline_rounded, color: theme.error),
+                    Icon(Icons.play_circle_outline_rounded,
+                        color: Colors.red.shade700),
                     Text(
                       "Youtube Player",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: theme.error),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red.shade700),
                     ),
                   ],
                 ),
