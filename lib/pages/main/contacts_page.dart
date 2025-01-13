@@ -3,7 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:minichat/main.dart';
 import 'package:minichat/pages/content/add_contact_page.dart';
 import 'package:minichat/widgets/items/user_tile.dart';
-import 'package:minichat/widgets/popups/common_alert_dialog.dart';
+import 'package:minichat/widgets/popups/confirm_alert_dialog.dart';
 
 class ContactsPage extends StatefulWidget {
   const ContactsPage({super.key});
@@ -122,19 +122,25 @@ class _ContactsPageState extends State<ContactsPage> {
         children: [
           // slidable item
           IconButton(
-            onPressed: () {
-              showAdaptiveDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return CommonAlertDialog(
-                    title: Text("Delete Contact"),
-                    content:
-                        Text("Are you sure you want to delete this contact?"),
-                    buttonColor: theme.errorContainer,
-                  );
-                },
-              );
-            },
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ConfirmAlertDialog(
+                  title: Text(
+                    "Delete Contact",
+                    style: TextStyle(
+                      color: theme.error,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  yesButtonText: "Delete",
+                  content:
+                      Text("Are you sure you want to delete this contact?"),
+                  yesButtonColor: theme.error,
+                  onTapYes: () => deleteContact(index),
+                );
+              },
+            ),
             icon: Icon(Icons.delete_forever_rounded),
             iconSize: 30,
             color: theme.error,
