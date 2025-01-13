@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:minichat/pages/content/chat_page.dart';
-import 'package:minichat/pages/content/profile_page.dart';
+import 'package:minichat/pages/main/content/chat_page.dart';
+import 'package:minichat/pages/main/content/profile_page.dart';
 import 'package:minichat/services/auth/auth_service.dart';
 import 'package:minichat/services/chat/chat_service.dart';
 import 'package:minichat/widgets/items/chatroom_tile.dart';

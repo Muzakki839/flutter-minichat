@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:minichat/main.dart';
-import 'package:minichat/pages/content/add_contact_page.dart';
+import 'package:minichat/pages/main/content/add_contact_page.dart';
 import 'package:minichat/widgets/items/user_tile.dart';
 import 'package:minichat/widgets/popups/confirm_alert_dialog.dart';
 
