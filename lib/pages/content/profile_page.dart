@@ -54,7 +54,7 @@ class ProfilePage extends StatelessWidget {
 
           // footer
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
             child: CommonButton(
               theme: theme,
               onPressed: () => logout(context),
