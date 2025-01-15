@@ -71,6 +71,20 @@ class _WeightConverterPageState extends State<WeightConverterPage> {
     }
   }
 
+  void _swapUnits() {
+    setState(() {
+      String tempUnit = selectedUnit1;
+      selectedUnit1 = selectedUnit2;
+      selectedUnit2 = tempUnit;
+
+      TextEditingController tempController = _value1Controller;
+      _value1Controller.text = _value2Controller.text;
+      _value2Controller.text = tempController.text;
+
+      _convertFromValue1();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -107,7 +121,11 @@ class _WeightConverterPageState extends State<WeightConverterPage> {
         // swap icon
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 30),
-          child: Icon(Icons.swap_horiz_rounded, size: 40),
+          child: IconButton(
+            icon: Icon(Icons.swap_horiz_rounded),
+            iconSize: 40,
+            onPressed: _swapUnits,
+          ),
         ),
 
         // value2
