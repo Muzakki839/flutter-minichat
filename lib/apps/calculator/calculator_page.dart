@@ -1,8 +1,41 @@
+import 'package:expressions/expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:minichat/widgets/buttons/card_button.dart';
 
-class CalculatorPage extends StatelessWidget {
+class CalculatorPage extends StatefulWidget {
   const CalculatorPage({super.key});
+
+  @override
+  State<CalculatorPage> createState() => _CalculatorPageState();
+}
+
+class _CalculatorPageState extends State<CalculatorPage> {
+  String prevOperation = ""; // e.g. "4+1"
+  String value = "0"; // e.g. "5"
+
+  void appendToValue(String newValue) {
+    setState(() {
+      if (value == "0") {
+        value = newValue;
+      } else {
+        value += newValue;
+      }
+    });
+  }
+
+  void count() {
+    setState(() {
+      prevOperation = value;
+      try {
+        final expression = Expression.parse(value);
+        final evaluator = const ExpressionEvaluator();
+        final result = evaluator.eval(expression, {});
+        value = result.toString();
+      } catch (e) {
+        value = "Error";
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +48,9 @@ class CalculatorPage extends StatelessWidget {
           scale: 1.2,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 10,
             children: [
               Icon(Icons.calculate_rounded, color: Colors.blue.shade700),
+              SizedBox(width: 10),
               Text(
                 "Calculator",
                 style: TextStyle(
@@ -34,11 +67,9 @@ class CalculatorPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(right: 20, bottom: 100),
-              child: _buildValueDisplay(theme),
-            ),
+          Padding(
+            padding: const EdgeInsets.only(right: 20, left: 20, bottom: 55),
+            child: _buildValueDisplay(theme),
           ),
 
           // numpad
@@ -51,6 +82,7 @@ class CalculatorPage extends StatelessWidget {
                 text: "=",
                 backgroundColor: Colors.green.shade700,
                 foregroundColor: theme.onPrimary,
+                onTap: count,
               ),
             ),
           ),
@@ -66,7 +98,7 @@ class CalculatorPage extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: Text(
-            "4+1",
+            prevOperation,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 30,
@@ -78,8 +110,9 @@ class CalculatorPage extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: Text(
-            "5",
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 50),
+            value,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 60),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
@@ -92,43 +125,91 @@ class CalculatorPage extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4, crossAxisSpacing: 10, mainAxisSpacing: 10),
       children: [
-        CardButton(text: "7"),
-        CardButton(text: "8"),
-        CardButton(text: "9"),
+        CardButton(
+          text: "7",
+          onTap: () => appendToValue("7"),
+        ),
+        CardButton(
+          text: "8",
+          onTap: () => appendToValue("8"),
+        ),
+        CardButton(
+          text: "9",
+          onTap: () => appendToValue("9"),
+        ),
         CardButton(
           text: "+",
           backgroundColor: Colors.blue.shade400,
           foregroundColor: theme.onPrimary,
+          onTap: () => appendToValue("+"),
         ),
-        CardButton(text: "4"),
-        CardButton(text: "5"),
-        CardButton(text: "6"),
+        CardButton(
+          text: "4",
+          onTap: () => appendToValue("4"),
+        ),
+        CardButton(
+          text: "5",
+          onTap: () => appendToValue("5"),
+        ),
+        CardButton(
+          text: "6",
+          onTap: () => appendToValue("6"),
+        ),
         CardButton(
           text: "–",
           backgroundColor: Colors.blue.shade400,
           foregroundColor: theme.onPrimary,
+          onTap: () => appendToValue("-"),
         ),
-        CardButton(text: "1"),
-        CardButton(text: "2"),
-        CardButton(text: "3"),
+        CardButton(
+          text: "1",
+          onTap: () => appendToValue("1"),
+        ),
+        CardButton(
+          text: "2",
+          onTap: () => appendToValue("2"),
+        ),
+        CardButton(
+          text: "3",
+          onTap: () => appendToValue("3"),
+        ),
         CardButton(
           text: "x",
           backgroundColor: Colors.blue.shade400,
           foregroundColor: theme.onPrimary,
+          onTap: () => appendToValue("*"),
         ),
         CardButton(
           text: "C",
           backgroundColor: Colors.red.shade400,
           foregroundColor: theme.onPrimary,
+          onTap: () {
+            setState(() {
+              value = "0";
+            });
+          },
         ),
-        CardButton(text: "0"),
+        CardButton(
+          text: "0",
+          onTap: () => appendToValue("0"),
+        ),
         CardButton(
           icon: Icon(Icons.backspace, color: Colors.red.shade400, size: 30),
+          onTap: () {
+            setState(() {
+              if (value.length > 1) {
+                value = value.substring(0, value.length - 1);
+              } else {
+                value = "0";
+              }
+            });
+          },
         ),
         CardButton(
           text: "/",
           backgroundColor: Colors.blue.shade500,
           foregroundColor: theme.onPrimary,
+          onTap: () => appendToValue("/"),
         ),
       ],
     );
