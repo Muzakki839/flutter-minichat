@@ -18,10 +18,8 @@ class _WeightConverterPageState extends State<WeightConverterPage> {
     "Ton",
   ];
 
-  final TextEditingController _value1Controller =
-      TextEditingController(text: "0");
-  final TextEditingController _value2Controller =
-      TextEditingController(text: "0");
+  final TextEditingController _value1Controller = TextEditingController();
+  final TextEditingController _value2Controller = TextEditingController();
 
   String selectedUnit1 = "Kilogram (kg)";
   String selectedUnit2 = "Gram (g)";
@@ -29,13 +27,13 @@ class _WeightConverterPageState extends State<WeightConverterPage> {
   void _convertFromValue1() {
     double value1 = double.tryParse(_value1Controller.text) ?? 0;
     double value2 = _convertWeight(value1, selectedUnit1, selectedUnit2);
-    _value2Controller.text = value2.toStringAsPrecision(2);
+    _value2Controller.text = value2.toStringAsPrecision(4);
   }
 
   void _convertFromValue2() {
     double value2 = double.tryParse(_value2Controller.text) ?? 0;
     double value1 = _convertWeight(value2, selectedUnit2, selectedUnit1);
-    _value1Controller.text = value1.toStringAsPrecision(2);
+    _value1Controller.text = value1.toStringAsPrecision(4);
   }
 
   double _convertWeight(double value, String fromUnit, String toUnit) {
@@ -91,7 +89,7 @@ class _WeightConverterPageState extends State<WeightConverterPage> {
           onChanged: (value) {
             setState(() {
               selectedUnit1 = value!;
-              _convertFromValue1();
+              _convertFromValue2();
             });
           },
         ),
@@ -125,7 +123,7 @@ class _WeightConverterPageState extends State<WeightConverterPage> {
           onChanged: (value) {
             setState(() {
               selectedUnit2 = value!;
-              _convertFromValue2();
+              _convertFromValue1();
             });
           },
         ),

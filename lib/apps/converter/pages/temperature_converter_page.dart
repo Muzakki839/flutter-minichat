@@ -18,10 +18,8 @@ class _TemperatureConverterPageState extends State<TemperatureConverterPage> {
     "Kelvin",
   ];
 
-  final TextEditingController _value1Controller =
-      TextEditingController(text: "0");
-  final TextEditingController _value2Controller =
-      TextEditingController(text: "0");
+  final TextEditingController _value1Controller = TextEditingController();
+  final TextEditingController _value2Controller = TextEditingController();
 
   String selectedUnit1 = "Celsius";
   String selectedUnit2 = "Fahrenheit";
@@ -81,7 +79,7 @@ class _TemperatureConverterPageState extends State<TemperatureConverterPage> {
           onChanged: (value) {
             setState(() {
               selectedUnit1 = value!;
-              _convertFromValue1();
+              _convertFromValue2();
             });
           },
         ),
@@ -115,7 +113,7 @@ class _TemperatureConverterPageState extends State<TemperatureConverterPage> {
           onChanged: (value) {
             setState(() {
               selectedUnit2 = value!;
-              _convertFromValue2();
+              _convertFromValue1();
             });
           },
         ),
