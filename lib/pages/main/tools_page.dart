@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minichat/apps/calculator/calculator_page.dart';
 import 'package:minichat/apps/youtube_player/youtube_player_page.dart';
 import 'package:minichat/widgets/items/grid_tile_button.dart';
 
@@ -51,10 +52,10 @@ class ToolsPage extends StatelessWidget {
             icon: Icons.calculate_rounded,
             iconColor: Colors.blue.shade700,
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CalculatorPage()),
+              );
             },
           ),
           GridTileButton(
