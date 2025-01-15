@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minichat/apps/calculator/calculator_app.dart';
+import 'package:minichat/apps/converter/coverter_app.dart';
 import 'package:minichat/apps/youtube_player/youtube_player_app.dart';
 import 'package:minichat/widgets/items/grid_tile_button.dart';
 
@@ -63,10 +64,10 @@ class ToolsPage extends StatelessWidget {
             icon: Icons.swap_horizontal_circle_rounded,
             iconColor: Colors.purple.shade600,
             onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => ),
-              // );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CoverterApp()),
+              );
             },
           ),
         ],
