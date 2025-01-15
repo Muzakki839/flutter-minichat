@@ -2,14 +2,14 @@ import 'package:expressions/expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:minichat/widgets/buttons/card_button.dart';
 
-class CalculatorPage extends StatefulWidget {
-  const CalculatorPage({super.key});
+class CalculatorApp extends StatefulWidget {
+  const CalculatorApp({super.key});
 
   @override
-  State<CalculatorPage> createState() => _CalculatorPageState();
+  State<CalculatorApp> createState() => _CalculatorAppState();
 }
 
-class _CalculatorPageState extends State<CalculatorPage> {
+class _CalculatorAppState extends State<CalculatorApp> {
   String prevOperation = ""; // e.g. "4+1"
   String value = "0"; // e.g. "5"
 
@@ -109,10 +109,15 @@ class _CalculatorPageState extends State<CalculatorPage> {
         // result text
         Align(
           alignment: Alignment.centerRight,
-          child: Text(
-            value,
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 60),
-            overflow: TextOverflow.ellipsis,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            reverse: true,
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              value,
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 60),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ),
       ],
