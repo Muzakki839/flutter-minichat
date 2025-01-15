@@ -12,6 +12,7 @@ class CommonTextField extends StatelessWidget {
     this.inputBorder,
     this.textAlign,
     this.keyboardType,
+    this.onChanged,
   });
 
   final Color? textColor;
@@ -23,8 +24,10 @@ class CommonTextField extends StatelessWidget {
 
   final String hintText;
   final TextEditingController controller;
-  final void Function(String)? onSubmitted;
+
   final FocusNode? focusNode;
+  final void Function(String)? onSubmitted;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class CommonTextField extends StatelessWidget {
       textAlign: textAlign ?? TextAlign.left,
       cursorColor: textColor ?? theme.scrim,
       keyboardType: keyboardType,
+      onChanged: onChanged,
       onSubmitted: onSubmitted,
       onTapOutside: (event) {
         focusNode?.unfocus();
