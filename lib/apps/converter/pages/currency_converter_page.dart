@@ -33,8 +33,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       final rates = json.decode(response.body)['rates'];
       return rates[toUnit];
     } else {
-      print('Failed to load conversion rate: ${response.statusCode}');
-      print('Response body: ${response.body}');
+      debugPrint('Failed to load conversion rate: ${response.statusCode}');
+      debugPrint('Response body: ${response.body}');
       throw Exception('Failed to load conversion rate');
     }
   }
@@ -46,7 +46,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       double value2 = value1 * rate;
       _value2Controller.text = value2.toStringAsFixed(2);
     } catch (e) {
-      print('Error converting from value1: $e');
+      debugPrint('Error converting from value1: $e');
     }
   }
 
@@ -57,7 +57,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       double value1 = value2 * rate;
       _value1Controller.text = value1.toStringAsFixed(2);
     } catch (e) {
-      print('Error converting from value2: $e');
+      debugPrint('Error converting from value2: $e');
     }
   }
 
