@@ -10,11 +10,16 @@ class CommonTextField extends StatelessWidget {
     this.textColor,
     this.backgroundColor,
     this.inputBorder,
+    this.textAlign,
+    this.keyboardType,
   });
 
   final Color? textColor;
   final Color? backgroundColor;
+
   final InputBorder? inputBorder;
+  final TextAlign? textAlign;
+  final TextInputType? keyboardType;
 
   final String hintText;
   final TextEditingController controller;
@@ -34,7 +39,9 @@ class CommonTextField extends StatelessWidget {
         enabledBorder: inputBorder ?? InputBorder.none,
       ),
       style: TextStyle(color: textColor ?? theme.scrim), // Set input text color
+      textAlign: textAlign ?? TextAlign.left,
       cursorColor: textColor ?? theme.scrim,
+      keyboardType: keyboardType,
       onSubmitted: onSubmitted,
       onTapOutside: (event) {
         focusNode?.unfocus();

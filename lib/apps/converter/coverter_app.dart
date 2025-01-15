@@ -62,11 +62,14 @@ class _CoverterAppState extends State<CoverterApp> {
         ]),
 
         // tab views
-        body: TabBarView(children: <Widget>[
-          TemperatureConverterPage(),
-          WeightConverterPage(),
-          CurrencyConverterPage(),
-        ]),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 40),
+          child: TabBarView(children: <Widget>[
+            TemperatureConverterPage(),
+            WeightConverterPage(),
+            CurrencyConverterPage(),
+          ]),
+        ),
       ),
     );
   }
