@@ -64,30 +64,87 @@ class _CalculatorAppState extends State<CalculatorApp> {
       ),
 
       // content
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20, left: 20, bottom: 55),
-            child: _buildValueDisplay(theme),
-          ),
+      body: OrientationBuilder(
+        builder: (context, orientation) => orientation == Orientation.portrait
+            ? _buildPotraitLayout(theme)
+            : _buildLandscapeLayout(theme),
+      ),
+    );
+  }
 
-          // numpad
-          SizedBox(height: 420, child: _buildNumpad(theme)),
-          SizedBox(
-            height: 80,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-              child: CardButton(
-                text: "=",
-                backgroundColor: Colors.green.shade700,
-                foregroundColor: theme.onPrimary,
-                onTap: count,
+  Row _buildLandscapeLayout(ColorScheme theme) {
+    return Row(
+      children: [
+        // Value display on left
+        Expanded(
+          flex: 4,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              // value display
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
+                child: _buildValueDisplay(theme),
+              ),
+
+              // result button
+              Padding(
+                padding: const EdgeInsets.only(bottom: 40),
+                child: SizedBox(
+                  height: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: CardButton(
+                      text: "=",
+                      backgroundColor: Colors.green.shade700,
+                      foregroundColor: theme.onPrimary,
+                      onTap: count,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Numpad on right
+        Expanded(
+          flex: 2,
+          child: SizedBox(height: 300, child: _buildNumpad(theme)),
+        ),
+      ],
+    );
+  }
+
+  Column _buildPotraitLayout(ColorScheme theme) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        // value display
+        Padding(
+          padding: const EdgeInsets.only(right: 20, left: 20, bottom: 55),
+          child: _buildValueDisplay(theme),
+        ),
+
+        // numpad
+        Column(
+          children: [
+            SizedBox(height: 420, child: _buildNumpad(theme)),
+            SizedBox(
+              height: 80,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                child: CardButton(
+                  text: "=",
+                  backgroundColor: Colors.green.shade700,
+                  foregroundColor: theme.onPrimary,
+                  onTap: count,
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        )
+      ],
     );
   }
 

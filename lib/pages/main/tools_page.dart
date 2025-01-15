@@ -34,8 +34,8 @@ class ToolsPage extends StatelessWidget {
       // tools grid
       body: GridView(
         padding: EdgeInsets.all(20),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, crossAxisSpacing: 10, mainAxisSpacing: 10),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 150, crossAxisSpacing: 10, mainAxisSpacing: 10),
         children: [
           GridTileButton(
             nameText: "Youtube Player",
